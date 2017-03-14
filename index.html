@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  <meta charset="utf-8" />
+  <title>Readit</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+</head>
+<body ng-controller="MainController">
+  <img src="http://www.logospike.com/wp-content/uploads/2014/11/Reddit_logo-5.png" alt="Readit Logo" height="50" width="50">
+  <div id="navigation"></div>
+  <div id="content">
+    <div id="sidebar">
+      <form id="newsub">
+        <input type="text" class="sub-input" placeholder="New Sub" ng-model="newSub">
+        <button ng-click="addSub(newSub)">add</button>
+      </form>
+      <section>
+        <ul>
+          <li ng-repeat="sub in subs">
+            <div  class="sub-title">{{ sub }}</div>
+            <button ng-click="deleteSub(sub)" class="delete-sub">delete</button>
+            <button ng-click="goToSub(sub)" class="delete-sub">go to</button>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <div id="main">
+      <div id="post-options">
+       <a href='#' id="merge" ng-click="mergeView()">MergeView</a>
+       <a href='#' id="new" ng-click="orderByCreated()">New</a>
+       <a href='#' id="hot" ng-click="orderByPopularity()">Hot</a>
+     </div>
+     <div id="posts">
+       <h3 ng-if="!posts.length">Loading...</h3>
+       <ul>
+         <li ng-repeat="post in posts">
+           <div class='post'>
+             <a class="title" target="_blank" href="http://www.reddit.com/{{post.data.permalink}}">{{ post.data.title }}<div class="subreddit">-r/{{post.data.subreddit}}</div></a>
+           </div>
+        </li>
+       </ul>
+     </div>
+    </div>
+  </div>  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
